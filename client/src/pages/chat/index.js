@@ -9,7 +9,7 @@ const Chat = ({ username, room, socket }) => {
       <RoomAndUsersColumn socket={socket} username={username} room={room} />
 
       <div>
-        <MessagesReceived socket={socket} />
+        <MessagesReceived socket={socket} room={room} username={username} />
         <SendMessage socket={socket} username={username} room={room} />
       </div>
     </div>

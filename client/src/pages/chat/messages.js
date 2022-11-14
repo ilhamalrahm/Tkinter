@@ -1,7 +1,7 @@
 import styles from './styles.module.css';
 import { useState, useEffect, useRef } from 'react';
 
-const Messages = ({ socket }) => {
+const Messages = ({ socket,username,room }) => {
   const [messagesRecieved, setMessagesReceived] = useState([]);
 
   const messagesColumnRef = useRef(null);
@@ -10,14 +10,19 @@ const Messages = ({ socket }) => {
   useEffect(() => {
     socket.on('receive_message', (data) => {
       console.log(data);
-      setMessagesReceived((state) => [
-        ...state,
-        {
-          message: data.message,
-          username: data.username,
-          __createdtime__: data.__createdtime__,
-        },
-      ]);
+      console.log(room)
+      if(data.room==room){
+        setMessagesReceived((state) => [
+          ...state,
+          {
+            message: data.message,
+            username: data.username,
+            __createdtime__: data.__createdtime__,
+          },
+        ]);
+
+      }
+      
     });
 
     // Remove event listener on component unmount
@@ -27,8 +32,9 @@ const Messages = ({ socket }) => {
   useEffect(() => {
     // Last 100 messages sent in the chat room (fetched from the db in backend)
     socket.on('last_100_messages', (last100Messages) => {
-      console.log('Last 100 messages:', JSON.parse(last100Messages));
-      last100Messages = JSON.parse(last100Messages);
+      console.log(last100Messages);
+      // console.log('Last 100 messages:', JSON.parse(last100Messages));
+      // last100Messages = JSON.parse(last100Messages);
       // Sort these messages by __createdtime__
       last100Messages = sortMessagesByDate(last100Messages);
       setMessagesReceived((state) => [...last100Messages, ...state]);
