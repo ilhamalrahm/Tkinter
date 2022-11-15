@@ -32,6 +32,7 @@ const Home = ({ username, setUsername, room, setRoom, socket }) => {
           <option value='node'>Node</option>
           <option value='express'>Express</option>
           <option value='react'>React</option>
+          <option value='python'>Python</option>
         </select>
 
         <button

@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 const RoomAndUsers = ({ socket, username, room }) => {
   const [roomUsers, setRoomUsers] = useState([]);
+  const [flag,setFlag]=useState(false);
 
   const navigate = useNavigate();
 
@@ -19,6 +20,14 @@ const RoomAndUsers = ({ socket, username, room }) => {
   const leaveRoom = () => {
     const __createdtime__ = Date.now();
     socket.emit('leave_room', { username, room, __createdtime__ });
+    if(flag==true){
+      console.log(flag)
+      setFlag(false)
+    }
+    else{
+      console.log(flag)
+      setFlag(true)
+    }
     // Redirect to home page
     navigate('/', { replace: true });
   };
