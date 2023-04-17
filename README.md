@@ -1,4 +1,6 @@
 # Realtime chat app
 
-Built with create-react-app, expressjs, socketIO and MongoDB.
+Built with ReactJs, ExpressJs, socketIO and MongoDB.
+This Project is not built using Tkinter, the Repo name is Tkinter because the initial plan was to build using Tkinter.
+
 
